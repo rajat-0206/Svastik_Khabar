@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:svastik_khabar/getnews.dart';
+import 'package:svastik_khabar/newsdetails.dart';
+import 'package:svastik_khabar/tabs/listview.dart';
 import 'package:svastik_khabar/tabs/newsWidget.dart';
 
 dynamic result = "waiting";
@@ -7,14 +9,18 @@ dynamic sports = "waiting",
     business = "waiting",
     technology = "waiting",
     politics = "waiting",
-    entertainment = "waiting";
+    entertainment = "waiting",
+    health = "waiting",
+    science = "waiting";
 
 _getNews() async {
   sports = await getNews().News("sports");
-  politics = await getNews().News("politics");
+  politics = await getNews().News("general");
   entertainment = await getNews().News("entertainment");
   business = await getNews().News("business");
   technology = await getNews().News("technology");
+  health = await getNews().News("health");
+  science = await getNews().News("science");
 }
 
 void main() async {
@@ -22,6 +28,8 @@ void main() async {
   await _getNews();
   runApp(MaterialApp(
     home: MyApp(),
+    themeMode: ThemeMode.system,
+    darkTheme: ThemeData.dark(),
     debugShowCheckedModeBanner: false,
   ));
 }
@@ -48,11 +56,14 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
     Tab(
       child: Text("Technology"),
     ),
-    // Tab(
-    //   child: Text("World"),
-    // ),
     Tab(
       child: Text("Finance"),
+    ),
+    Tab(
+      child: Text("Health"),
+    ),
+    Tab(
+      child: Text("Science"),
     ),
   ];
 
@@ -65,16 +76,8 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
     });
   }
 
-// setState(() async {
-//       sports = await getNews().News("sports");
-//       politics = await getNews().News("politics");
-//       entertainment = await getNews().News("entertainment");
-//       business = await getNews().News("business");
-//       technology = await getNews().News("technology");
-//     });
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _tabController = TabController(length: _tabs.length, vsync: this);
     _getnews("india");
@@ -110,7 +113,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
             SizedBox(
               width: 5,
             ),
-            Text("Khabar",
+            Text("NEWS",
                 style: TextStyle(
                   color: Colors.blue,
                   fontSize: 20,
@@ -145,8 +148,19 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                       itemCount: result.length,
                       itemBuilder: (context, index) {
                         return InkWell(
-                          onTap: () {},
-                          child: newsWidget(item: result[index]),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        Details(url: result[index]['url'])));
+                          },
+                          child: newsWidget(
+                              item: NewsView(
+                                  imageUrl: result[index]['urlToImage'],
+                                  title: result[index]['title'],
+                                  author: result[index]['author'],
+                                  date: result[index]['publishedAt'])),
                         );
                       }),
             ),
@@ -159,8 +173,19 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                       itemCount: sports.length,
                       itemBuilder: (context, index) {
                         return InkWell(
-                          onTap: () {},
-                          child: newsWidget(item: sports[index]),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        Details(url: sports[index]['url'])));
+                          },
+                          child: newsWidget(
+                              item: NewsView(
+                                  imageUrl: sports[index]['urlToImage'],
+                                  title: sports[index]['title'],
+                                  author: sports[index]['author'],
+                                  date: sports[index]['publishedAt'])),
                         );
                       }),
             ),
@@ -173,8 +198,19 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                       itemCount: politics.length,
                       itemBuilder: (context, index) {
                         return InkWell(
-                          onTap: () {},
-                          child: newsWidget(item: politics[index]),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        Details(url: politics[index]['url'])));
+                          },
+                          child: newsWidget(
+                              item: NewsView(
+                                  imageUrl: politics[index]['urlToImage'],
+                                  title: politics[index]['title'],
+                                  author: politics[index]['author'],
+                                  date: politics[index]['publishedAt'])),
                         );
                       }),
             ),
@@ -187,8 +223,19 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                       itemCount: entertainment.length,
                       itemBuilder: (context, index) {
                         return InkWell(
-                          onTap: () {},
-                          child: newsWidget(item: entertainment[index]),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Details(
+                                        url: entertainment[index]['url'])));
+                          },
+                          child: newsWidget(
+                              item: NewsView(
+                                  imageUrl: entertainment[index]['urlToImage'],
+                                  title: entertainment[index]['title'],
+                                  author: entertainment[index]['author'],
+                                  date: entertainment[index]['publishedAt'])),
                         );
                       }),
             ),
@@ -201,8 +248,19 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                       itemCount: technology.length,
                       itemBuilder: (context, index) {
                         return InkWell(
-                          onTap: () {},
-                          child: newsWidget(item: technology[index]),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Details(
+                                        url: technology[index]['url'])));
+                          },
+                          child: newsWidget(
+                              item: NewsView(
+                                  imageUrl: technology[index]['urlToImage'],
+                                  title: technology[index]['title'],
+                                  author: technology[index]['author'],
+                                  date: technology[index]['publishedAt'])),
                         );
                       }),
             ),
@@ -215,8 +273,69 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                       itemCount: business.length,
                       itemBuilder: (context, index) {
                         return InkWell(
-                          onTap: () {},
-                          child: newsWidget(item: business[index]),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        Details(url: business[index]['url'])));
+                          },
+                          child: newsWidget(
+                              item: NewsView(
+                                  imageUrl: business[index]['urlToImage'],
+                                  title: business[index]['title'],
+                                  author: business[index]['author'],
+                                  date: business[index]['publishedAt'])),
+                        );
+                      }),
+            ),
+            Padding(
+              padding: EdgeInsets.all(10.0),
+              child: health == "waiting"
+                  ? Center(child: CircularProgressIndicator())
+                  : ListView.builder(
+                      physics: BouncingScrollPhysics(),
+                      itemCount: health.length,
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        Details(url: health[index]['url'])));
+                          },
+                          child: newsWidget(
+                              item: NewsView(
+                                  imageUrl: health[index]['urlToImage'],
+                                  title: health[index]['title'],
+                                  author: health[index]['author'],
+                                  date: health[index]['publishedAt'])),
+                        );
+                      }),
+            ),
+            Padding(
+              padding: EdgeInsets.all(10.0),
+              child: science == "waiting"
+                  ? Center(child: CircularProgressIndicator())
+                  : ListView.builder(
+                      physics: BouncingScrollPhysics(),
+                      itemCount: science.length,
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        Details(url: science[index]['url'])));
+                          },
+                          child: newsWidget(
+                              item: NewsView(
+                                  imageUrl: science[index]['urlToImage'],
+                                  title: science[index]['title'],
+                                  author: science[index]['author'],
+                                  date: science[index]['publishedAt'])),
                         );
                       }),
             ),

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'listview.dart';
 
@@ -7,7 +8,8 @@ class newsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-        elevation: 20,
+        color: Colors.white,
+        elevation: 1,
         child: Padding(
           padding: EdgeInsets.only(bottom: 20),
           child: Column(
@@ -19,7 +21,8 @@ class newsWidget extends StatelessWidget {
                   height: MediaQuery.of(context).size.width * 0.7,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: NetworkImage(item.imageUrl), fit: BoxFit.cover),
+                        image: CachedNetworkImageProvider(item.imageUrl),
+                        fit: BoxFit.cover),
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),

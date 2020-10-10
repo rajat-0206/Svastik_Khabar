@@ -22,18 +22,6 @@ class getNews {
     final data = json.decode(response.body);
     List khabar = data['articles'];
     List<NewsView> listTiles = [];
-    for (final i in khabar) {
-      if (i['author'] == null ||
-          i['title'] == null ||
-          i['urlToImage'] == null ||
-          i['publishedAt'] == null) continue;
-      NewsView temp = new NewsView();
-      temp.author = i['author'];
-      temp.title = i['title'];
-      temp.imageUrl = i['urlToImage'];
-      temp.date = i['publishedAt'];
-      listTiles.add(temp);
-    }
-    return listTiles;
+    return khabar;
   }
 }
