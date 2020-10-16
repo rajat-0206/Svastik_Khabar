@@ -21,7 +21,6 @@ class getNews {
     final response = await http.get(url);
     final data = json.decode(response.body);
     List khabar = data['articles'];
-    List<NewsView> listTiles = [];
     return khabar;
   }
 }

@@ -24,14 +24,13 @@ _getNews() async {
 }
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized(); //all widgets are rendered here
-  await _getNews();
   runApp(MaterialApp(
     home: MyApp(),
     themeMode: ThemeMode.system,
-    darkTheme: ThemeData.dark(),
     debugShowCheckedModeBanner: false,
   ));
+  WidgetsFlutterBinding.ensureInitialized(); //all widgets are rendered here
+  await _getNews();
 }
 
 class MyApp extends StatefulWidget {
@@ -147,21 +146,25 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                       physics: BouncingScrollPhysics(),
                       itemCount: result.length,
                       itemBuilder: (context, index) {
-                        return InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        Details(url: result[index]['url'])));
-                          },
-                          child: newsWidget(
-                              item: NewsView(
-                                  imageUrl: result[index]['urlToImage'],
-                                  title: result[index]['title'],
-                                  author: result[index]['author'],
-                                  date: result[index]['publishedAt'])),
-                        );
+                        return result[index]['urlToImage'] == null
+                            ? SizedBox(
+                                height: 1,
+                              )
+                            : InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Details(
+                                              url: result[index]['url'])));
+                                },
+                                child: newsWidget(
+                                    item: NewsView(
+                                        imageUrl: result[index]['urlToImage'],
+                                        title: result[index]['title'],
+                                        author: result[index]['author'],
+                                        date: result[index]['publishedAt'])),
+                              );
                       }),
             ),
             Padding(
@@ -172,21 +175,25 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                       physics: BouncingScrollPhysics(),
                       itemCount: sports.length,
                       itemBuilder: (context, index) {
-                        return InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        Details(url: sports[index]['url'])));
-                          },
-                          child: newsWidget(
-                              item: NewsView(
-                                  imageUrl: sports[index]['urlToImage'],
-                                  title: sports[index]['title'],
-                                  author: sports[index]['author'],
-                                  date: sports[index]['publishedAt'])),
-                        );
+                        return sports[index]['urlToImage'] == null
+                            ? SizedBox(
+                                height: 1,
+                              )
+                            : InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Details(
+                                              url: sports[index]['url'])));
+                                },
+                                child: newsWidget(
+                                    item: NewsView(
+                                        imageUrl: sports[index]['urlToImage'],
+                                        title: sports[index]['title'],
+                                        author: sports[index]['author'],
+                                        date: sports[index]['publishedAt'])),
+                              );
                       }),
             ),
             Padding(
@@ -197,21 +204,25 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                       physics: BouncingScrollPhysics(),
                       itemCount: politics.length,
                       itemBuilder: (context, index) {
-                        return InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        Details(url: politics[index]['url'])));
-                          },
-                          child: newsWidget(
-                              item: NewsView(
-                                  imageUrl: politics[index]['urlToImage'],
-                                  title: politics[index]['title'],
-                                  author: politics[index]['author'],
-                                  date: politics[index]['publishedAt'])),
-                        );
+                        return politics[index]['urlToImage'] == null
+                            ? SizedBox(
+                                height: 1,
+                              )
+                            : InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Details(
+                                              url: politics[index]['url'])));
+                                },
+                                child: newsWidget(
+                                    item: NewsView(
+                                        imageUrl: politics[index]['urlToImage'],
+                                        title: politics[index]['title'],
+                                        author: politics[index]['author'],
+                                        date: politics[index]['publishedAt'])),
+                              );
                       }),
             ),
             Padding(
@@ -222,21 +233,28 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                       physics: BouncingScrollPhysics(),
                       itemCount: entertainment.length,
                       itemBuilder: (context, index) {
-                        return InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Details(
-                                        url: entertainment[index]['url'])));
-                          },
-                          child: newsWidget(
-                              item: NewsView(
-                                  imageUrl: entertainment[index]['urlToImage'],
-                                  title: entertainment[index]['title'],
-                                  author: entertainment[index]['author'],
-                                  date: entertainment[index]['publishedAt'])),
-                        );
+                        return entertainment[index]['urlToImage'] == null
+                            ? SizedBox(
+                                height: 1,
+                              )
+                            : InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Details(
+                                              url: entertainment[index]
+                                                  ['url'])));
+                                },
+                                child: newsWidget(
+                                    item: NewsView(
+                                        imageUrl: entertainment[index]
+                                            ['urlToImage'],
+                                        title: entertainment[index]['title'],
+                                        author: entertainment[index]['author'],
+                                        date: entertainment[index]
+                                            ['publishedAt'])),
+                              );
                       }),
             ),
             Padding(
@@ -247,21 +265,27 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                       physics: BouncingScrollPhysics(),
                       itemCount: technology.length,
                       itemBuilder: (context, index) {
-                        return InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Details(
-                                        url: technology[index]['url'])));
-                          },
-                          child: newsWidget(
-                              item: NewsView(
-                                  imageUrl: technology[index]['urlToImage'],
-                                  title: technology[index]['title'],
-                                  author: technology[index]['author'],
-                                  date: technology[index]['publishedAt'])),
-                        );
+                        return technology[index]['urlToImage'] == null
+                            ? SizedBox(
+                                height: 1,
+                              )
+                            : InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Details(
+                                              url: technology[index]['url'])));
+                                },
+                                child: newsWidget(
+                                    item: NewsView(
+                                        imageUrl: technology[index]
+                                            ['urlToImage'],
+                                        title: technology[index]['title'],
+                                        author: technology[index]['author'],
+                                        date: technology[index]
+                                            ['publishedAt'])),
+                              );
                       }),
             ),
             Padding(
@@ -272,21 +296,25 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                       physics: BouncingScrollPhysics(),
                       itemCount: business.length,
                       itemBuilder: (context, index) {
-                        return InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        Details(url: business[index]['url'])));
-                          },
-                          child: newsWidget(
-                              item: NewsView(
-                                  imageUrl: business[index]['urlToImage'],
-                                  title: business[index]['title'],
-                                  author: business[index]['author'],
-                                  date: business[index]['publishedAt'])),
-                        );
+                        return business[index]['urlToImage'] == null
+                            ? SizedBox(
+                                height: 1,
+                              )
+                            : InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Details(
+                                              url: business[index]['url'])));
+                                },
+                                child: newsWidget(
+                                    item: NewsView(
+                                        imageUrl: business[index]['urlToImage'],
+                                        title: business[index]['title'],
+                                        author: business[index]['author'],
+                                        date: business[index]['publishedAt'])),
+                              );
                       }),
             ),
             Padding(
@@ -297,21 +325,25 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                       physics: BouncingScrollPhysics(),
                       itemCount: health.length,
                       itemBuilder: (context, index) {
-                        return InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        Details(url: health[index]['url'])));
-                          },
-                          child: newsWidget(
-                              item: NewsView(
-                                  imageUrl: health[index]['urlToImage'],
-                                  title: health[index]['title'],
-                                  author: health[index]['author'],
-                                  date: health[index]['publishedAt'])),
-                        );
+                        return health[index]['urlToImage'] == null
+                            ? SizedBox(
+                                height: 1,
+                              )
+                            : InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Details(
+                                              url: health[index]['url'])));
+                                },
+                                child: newsWidget(
+                                    item: NewsView(
+                                        imageUrl: health[index]['urlToImage'],
+                                        title: health[index]['title'],
+                                        author: health[index]['author'],
+                                        date: health[index]['publishedAt'])),
+                              );
                       }),
             ),
             Padding(
@@ -322,21 +354,25 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                       physics: BouncingScrollPhysics(),
                       itemCount: science.length,
                       itemBuilder: (context, index) {
-                        return InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        Details(url: science[index]['url'])));
-                          },
-                          child: newsWidget(
-                              item: NewsView(
-                                  imageUrl: science[index]['urlToImage'],
-                                  title: science[index]['title'],
-                                  author: science[index]['author'],
-                                  date: science[index]['publishedAt'])),
-                        );
+                        return science[index]['urlToImage'] == null
+                            ? SizedBox(
+                                height: 1,
+                              )
+                            : InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Details(
+                                              url: science[index]['url'])));
+                                },
+                                child: newsWidget(
+                                    item: NewsView(
+                                        imageUrl: science[index]['urlToImage'],
+                                        title: science[index]['title'],
+                                        author: science[index]['author'],
+                                        date: science[index]['publishedAt'])),
+                              );
                       }),
             ),
           ]),
