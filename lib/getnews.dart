@@ -23,4 +23,15 @@ class getNews {
     List khabar = data['articles'];
     return khabar;
   }
+
+  Future<List> searchnews(String query) async {
+    String url = "";
+    url =
+        'http://newsapi.org/v2/everything?q=$query&sortBy=popularity&apiKey=2d8de2436029478eb0990acff8c48a38';
+
+    final response = await http.get(url);
+    final data = json.decode(response.body);
+    List khabar = data['articles'];
+    return khabar;
+  }
 }
