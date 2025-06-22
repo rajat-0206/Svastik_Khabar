@@ -63,8 +63,8 @@ width="200"
 
 ## Contributing
 
-Svastik Calculator is a free and open source project. Any contributions are welcome. Here are a few ways you can help:
- * [Report bugs and make suggestions.](https://github.com/rajat-0206/calculator-flutter/issues).
+Svastik News is a free and open source project. Any contributions are welcome. Here are a few ways you can help:
+ * [Report bugs and make suggestions.](https://github.com/rajat-0206/Svastik_Khabar/issues).
  * Write some code. Please follow the code style used in the project to make a review process faster.
 
 ## License
